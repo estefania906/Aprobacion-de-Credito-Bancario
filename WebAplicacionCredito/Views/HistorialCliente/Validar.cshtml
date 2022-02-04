@@ -1,0 +1,56 @@
+﻿@using Modelo
+
+@model Historial_Cliente 
+
+
+@{
+    ViewData["Title"] = "Validar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1>Creacion de un registro en el historial del cliente</h1>
+<h1>Crea un registro en el Historial del Cliente</h1>
+
+<div class=" row ">
+    <div class=" col-se-10 ">
+        <form method="post" asp-action="Validar">
+            <div class="form-group">
+                <label class="control-label"> Historial Cliente:</label>
+                <input class="form-control" asp-for="NumeroCuota" />
+            </div>
+            <div class="form-group">
+                <label class="control-label"> Cliente:</label>
+                <input class="form-control" asp-for="Cliente.CedulaCliente" />
+            </div>
+         
+
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" value="Validar" />
+            </div>
+
+        </form>
+    </div>
+    <div class=" col-se-10 ">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <td>Id Cliente</td>
+                    <td>Cliente </td>
+                    <td>Dias Retraso</td>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var validaciones in Model.Validaciones)
+                {
+                    <tr>
+                        <td>@validaciones.Cliente.ClienteId</td>
+                        <td>@validaciones.Cliente.NombreCliente @validaciones.Cliente.ApellidoCliente </td>
+                        <td>@ViewBag.calHistorialCliente.Promedio(validaciones.Historial_Cliente)</td>
+
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>

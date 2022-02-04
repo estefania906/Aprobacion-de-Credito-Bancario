@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Modelo.Cliente">
+    <Position X="0.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAACAAAAABAAAAAEBAAAAAAIAACAYAAAAAAAAAgUAA=</HashCode>
+      <FileName>Cliente.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Modelo.Cliente_Det">
+    <Position X="2.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAABAABAAABCAAAAAAQAAAAAAAAAAEAAAAAA=</HashCode>
+      <FileName>Cliente_Det.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Modelo.Configuracion">
+    <Position X="4.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAABBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Configuracion.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Modelo.Costo_Cuota">
+    <Position X="6" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAACAACABCAAAABAAAAAAEAAAAAIKAEAAA=</HashCode>
+      <FileName>Costo_Cuota.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Modelo.Credito">
+    <Position X="7.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABACAAAABCAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Credito.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Modelo.Garante">
+    <Position X="0.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAEAAAAAQAAAAAGAAAAAIAAAAAAACAAAAAAAAIA=</HashCode>
+      <FileName>Garante.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Modelo.Garante_Det">
+    <Position X="2.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAABAAAAAAAAAAIQAAAQAAAAAgAAAgAAA=</HashCode>
+      <FileName>Garante_Det.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Modelo.Historial_Cliente">
+    <Position X="4.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAEAAgAAAIAAAAABCAgAAAAAAAAAAEAAIAAIAgAAA=</HashCode>
+      <FileName>Historial_Cliente.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Modelo.Historial_Garante">
+    <Position X="6" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAIAAAAACAAgIAAIAAAAQAEAAIAAIAgAAA=</HashCode>
+      <FileName>Historial_Garante.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Modelo.Validaciones">
+    <Position X="8" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAEAAAAQAAAABGAAIAAAABEAIgACAAgAAAAEAQ=</HashCode>
+      <FileName>Validaciones.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Modelo.VigenciaTasaAnual">
+    <Position X="0.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAABAAAABAAAAAAAAAAAAAAAAAAAAAAIIAAA=</HashCode>
+      <FileName>VigenciaTasaAnual.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

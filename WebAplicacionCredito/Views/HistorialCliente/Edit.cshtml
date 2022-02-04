@@ -1,0 +1,57 @@
+﻿@using Modelo
+@model Historial_Cliente
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1>Actualizacion de un registro en el historial del cliente</h1>
+<h1>Actualiza un registro en el Historial del Cliente</h1>
+
+<div class=" row ">
+    <div class=" col-se-10 ">
+        <form method="post" asp-action="Edit">
+            <div class="form-group">
+                <label class="control-label"> Numero Cuota:</label>
+                <input class="form-control" asp-for="NumeroCuota" />
+            </div>
+            <div class="form-group">
+                <label class="control-label"> Fecha Pago Real:</label>
+                <input class="form-control" asp-for="FechaPagoReal" />
+            </div>
+            <div class="form-group">
+                <label class="control-label"> Fecha Pago Solicitado:</label>
+                <input class="form-control" asp-for="FechaPagoSolicitada" />
+            </div>
+            <div class="form-group">
+                <label class="control-label"> Cantidad Pagada:</label>
+                <input class="form-control" asp-for="CantidadPagada" />
+            </div>
+            <div class="form-group">
+                <label class="control-label"> Cantidad Solicitada:</label>
+                <input class="form-control" asp-for="CantidadSolicitada" />
+            </div>
+            <div class="form-group">
+                <label class="control-label"> Saldo:</label>
+                <input class="form-control" asp-for="Saldo" />
+            </div>
+            <div class="form-group">
+                <label class="control-label"> Dias Retrasados:</label>
+                <input class="form-control" asp-for="DiasRetrasoCliente" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Cliente</label>
+
+                <select class="form-control"
+                        asp-for="ClienteId"
+                        asp-items="@ViewBag.selectListValidaciones">
+                    <option value="">***Selecciona un Cliente***</option>
+                </select>
+
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary" value="Actualizar el cliente" />
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>

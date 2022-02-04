@@ -1,0 +1,78 @@
+﻿@using Modelo
+@model IEnumerable<Cliente>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Cliente</h1>
+
+<p>Se presenta a continuación la lista de los cliente registrados en el sistema Aprobacion de Credito Bancaria</p>
+
+<div class="container">
+
+    @if (TempData["mensaje"] != null)
+    {
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            @TempData["mensaje"]
+            <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                <span aria-hidden="true">
+                    &times;
+                </span>
+            </button>
+        </div>
+    }
+
+    <div class="row">
+        <div class="col-sm-6">
+            <h3>Lista de clientes</h3>
+        </div>
+        <div class="col-sm-6">
+            <a class="btn btn-success d-block"
+               asp-controller="Clientes" asp-action="Create">
+                Crear nuevo Cliente
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <td>Id</td>
+                    <td>Nombres</td>
+                    <td>Apellidos</td>
+                    <td>Cédula</td>
+                    <td>Teléfono</td>
+                    <td>Garante</td>
+                    <td>Acciones</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Cliente cliente in Model)
+                {
+                    <tr>
+                        <td>@cliente.ClienteId</td>
+                        <td>@cliente.NombreCliente</td>
+                        <td>@cliente.ApellidoCliente</td>
+                        <td>@cliente.CedulaCliente</td>
+                        <td>@cliente.TelefonoCliente</td>
+                        <td>@cliente.Garante.NombreGarante @cliente.Garante.ApellidoGarante</td>
+                        <td>
+                            <a class="btn btn-warning"
+                               asp-controller="Clientes" asp-action="Edit" asp-route-id="@cliente.ClienteId">
+                                Editar
+                            </a>
+                            <a class="btn btn-danger"
+                               asp-controller="Clientes" asp-action="Delete" asp-route-id="@cliente.ClienteId">
+                                Borrar
+                            </a>
+                        </td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
