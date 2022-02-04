@@ -102,10 +102,13 @@ namespace WebAplicacionCredito.Controllers
                 .Include(historial_cliente => historial_cliente.Cliente)
                 .Include(historial_cliente => historial_cliente.Validaciones)
                   .ThenInclude(validaciones => validaciones.Cliente)
+                .Include(historial_cliente => historial_cliente.Validaciones)
+                   .ThenInclude(validaciones => validaciones.Historial_Cliente)
+                   .ThenInclude(validaciones => validaciones.Cliente)
             .Single(historial_cliente => historial_cliente.HistorialClienteId == id);
 
             // .Single(cliente => cliente.ClienteId == id);
-            var cliente = db.cliente.Single(cliente => cliente.ClienteId == id);
+            var cliente = db.cliente.Single(cliente => cliente.ClienteId == historial_cliente.Cliente.ClienteId);
 
             CalHistorialCliente calHistorialCliente = new CalHistorialCliente(cliente);
             ViewBag.CalHistorialCliente = calHistorialCliente;

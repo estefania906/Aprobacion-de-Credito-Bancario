@@ -22,10 +22,7 @@ namespace Modelo.Calculo
       
         }
 
-        public double Promedio(Historial_Cliente historial_cliente) {
-
-                 var listaHistorialCliente = new List<Historial_Cliente>()
-                                .Where(historial_cliente => historial_cliente.ClienteId == idCliente);
+        public double Promedio(List<Historial_Cliente> listaHistorialCliente) {
 
                 double suma = 0;
                 foreach (var item in listaHistorialCliente)

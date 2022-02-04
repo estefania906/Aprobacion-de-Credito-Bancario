@@ -17,7 +17,7 @@ namespace Modelo
         public double CantidadPagada { get; set; }
         public double CantidadSolicitada { get; set; }
         public double Saldo { get; set; }
-        public int DiasRetrasoCliente { get; set; }
+        public double DiasRetrasoCliente { get; set; }
 
         public Cliente Cliente { get; set; }
         public int ClienteId { get; set; }

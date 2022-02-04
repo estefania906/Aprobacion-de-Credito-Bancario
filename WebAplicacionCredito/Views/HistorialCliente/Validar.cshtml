@@ -45,8 +45,7 @@
                     <tr>
                         <td>@validaciones.Cliente.ClienteId</td>
                         <td>@validaciones.Cliente.NombreCliente @validaciones.Cliente.ApellidoCliente </td>
-                        <td>@ViewBag.calHistorialCliente.Promedio(validaciones.Historial_Cliente)</td>
-
+                        <td>@ViewBag.CalHistorialCliente.Promedio(new List<Historial_Cliente>() { validaciones.Historial_Cliente })</td>
                     </tr>
                 }
 

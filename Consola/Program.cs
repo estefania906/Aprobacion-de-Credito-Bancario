@@ -21,11 +21,11 @@ namespace Consola
             {
                 var listaHistorialCliente = db.historial_cliente
                     .Where(historial_cliente => historial_cliente.ClienteId == 1);
-                float suma = 0f;
+                double suma = 0;
                 foreach (var item in listaHistorialCliente) {
                     suma += item.DiasRetrasoCliente;
                 }
-                float promedio = 0f;
+                double promedio = 0;
                 promedio = suma / listaHistorialCliente.Count();
 
                 var listaGarantes = db.garante
