@@ -1,17 +1,17 @@
 ﻿@using Modelo
-@model Cliente
+@model Garante
 @{
     ViewData["Title"] = "Delete";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Eliminación de cliente</h1>
-<p>Formulario para borrar un cliente en el sistema </p>
+<h1>Eliminación de garante</h1>
+<p>Formulario para borrar un garante en el sistema </p>
 
 <div class="container">
     <div class="row">
         <div class="col-sm-12">
-            <h3>Seguro que desea eleminar el cliente : @Model.NombreCliente</h3>
+            <h3>Seguro que desea eleminar el cliente : @Model.NombreGarante</h3>
         </div>
     </div>
 
@@ -20,30 +20,26 @@
 
             <form method="post" asp-action="Delete">
 
-                <input type="hidden" asp-for="ClienteId" />
+                <input type="hidden" asp-for="GaranteId" />
 
                 <div class="form-group">
                     <label class="control-label"> Nombre:</label>
-                    <input class="form-control" asp-for="NombreCliente" disabled />
+                    <input class="form-control" asp-for="NombreGarante" disabled />
                 </div>
                 <div class="form-group">
                     <label class="control-label"> Apellido:</label>
-                    <input class="form-control" asp-for="ApellidoCliente" disabled />
+                    <input class="form-control" asp-for="ApellidoGarante" disabled />
                 </div>
                 <div class="form-group">
                     <label class="control-label"> Cedula:</label>
-                    <input class="form-control" asp-for="CedulaCliente" disabled />
+                    <input class="form-control" asp-for="CedulaGarante" disabled />
                 </div>
                 <div class="form-group">
                     <label class="control-label"> Telefono:</label>
-                    <input class="form-control" asp-for="TelefonoCliente" disabled />
+                    <input class="form-control" asp-for="TelefonoGarante" disabled />
                 </div>
                 <div class="form-group">
-                    <label class="control-label"> Garante:</label>
-                    <input class="form-control" asp-for="@Model.Garante.CedulaGarante" disabled />
-                </div>
-                <div class="form-group">
-                    <input type="submit" class="btn btn-primary" value="Eliminar el cliente" />
+                    <input type="submit" class="btn btn-primary" value="Eliminar el garante" />
                 </div>
             </form>
 

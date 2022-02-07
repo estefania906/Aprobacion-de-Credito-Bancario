@@ -1,5 +1,5 @@
 ﻿using Consola;
-using Modelo;
+using ModeloDB;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,20 +11,20 @@ namespace Modelo.Calculo
 {
     public class CalHistorialCliente
     {
-        public double diasRetraso { get; set; }
-
+ 
         public int idCliente { get; set; }
         Cliente cliente { get; set; }
    
-        public CalHistorialCliente( Cliente cliente) {
+        public CalHistorialCliente(Cliente cliente) {
 
-            this.idCliente = cliente.ClienteId;
-      
+             this.idCliente = cliente.ClienteId;
+           
         }
 
-        public double Promedio(List<Historial_Cliente> listaHistorialCliente) {
-
+        public double Promedio(List<Historial_Cliente> listaHistorialCliente) 
+        {
                 double suma = 0;
+
                 foreach (var item in listaHistorialCliente)
                 {
                     suma += item.DiasRetrasoCliente;
@@ -32,7 +32,7 @@ namespace Modelo.Calculo
                 double promedio = 0;
 
                 promedio = suma / listaHistorialCliente.Count();
-
+           
                 return promedio;
             
         }

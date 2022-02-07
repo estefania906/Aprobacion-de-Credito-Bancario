@@ -9,8 +9,8 @@ namespace Modelo
 {
     public class Historial_Cliente
     {
-        [Key]
-        public int HistorialClienteId { get; set; }
+        
+        public int Historial_ClienteId { get; set; }
         public double NumeroCuota { get; set; }
         public DateTime FechaPagoReal { get; set; }
         public DateTime FechaPagoSolicitada { get; set; }

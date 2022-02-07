@@ -9,8 +9,8 @@ namespace Modelo
 {
     public class Garante_Det
     {
-        [Key]
-        public int GaranteDetId { get; set; }
+       
+        public int Garante_DetId { get; set; }
         public Garante Garante { get; set; }
         public int GaranteId { get; set; }
         public double AvaluoBienParticular { get; set; }

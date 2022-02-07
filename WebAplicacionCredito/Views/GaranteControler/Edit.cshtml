@@ -1,0 +1,49 @@
+﻿@using Modelo
+@model Garante
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edición de garante</h1>
+<p>Formulario para editar un garante en el sistema </p>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <h3>Usted está actualizando el cliente: @Model.NombreGarante</h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-10">
+
+            <form method="post" asp-action="Edit">
+
+                <input type="hidden" asp-for="GaranteId" />
+
+                <div class="form-group">
+                    <label class="control-label"> Nombre:</label>
+                    <input class="form-control" asp-for="NombreGarante" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label"> Apellido:</label>
+                    <input class="form-control" asp-for="ApellidoGarante" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label"> Cedula:</label>
+                    <input class="form-control" asp-for="CedulaGarante" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label"> Telefono:</label>
+                    <input class="form-control" asp-for="TelefonoGarante" />
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary" value="Actualizar el garante" />
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+</div>

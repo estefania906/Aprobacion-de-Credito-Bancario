@@ -9,8 +9,8 @@ namespace Modelo
 {
     public class Cliente_Det
     {
-        [Key]
-        public int ClienteDetId { get; set; }
+      
+        public int Cliente_DetId { get; set; }
         public Cliente Cliente { get; set; }
         public int ClienteId { get; set; }
         public double AvaluoBienParticular { get; set; }

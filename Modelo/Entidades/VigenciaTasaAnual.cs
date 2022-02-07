@@ -9,7 +9,7 @@ namespace Modelo
 {
     public class VigenciaTasaAnual
     {
-        [Key]
+        
         public int VigenciaTasaAnualId { get; set; }
 
         public double tasa_anual { get; set; }

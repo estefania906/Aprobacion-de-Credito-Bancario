@@ -1,0 +1,34 @@
+﻿@using Modelo
+@model Garante
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Creacion de garante</h1>
+<p>Formulario para crear un garante en el sistema </p>
+
+<div class=" row ">
+    <div class=" col-se-10 ">
+        <form method="post" asp-action="Create">
+            <div class="form-group">
+                <label class="control-label"> Nombre:</label>
+                <input class="form-control" asp-for="NombreGarante" />
+            </div>
+            <div class="form-group">
+                <label class="control-label"> Apellido:</label>
+                <input class="form-control" asp-for="ApellidoGarante" />
+            </div>
+            <div class="form-group">
+                <label class="control-label"> Cedula:</label>
+                <input class="form-control" asp-for="CedulaGarante" />
+            </div>
+            <div class="form-group">
+                <label class="control-label"> Telefono:</label>
+                <input class="form-control" asp-for="TelefonoGarante" />
+            </div>
+          
+                    <input type="submit" class="btn btn-primary" value="Crear el garante" />
+          </form>
+    </div>
+</div>

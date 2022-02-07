@@ -51,7 +51,7 @@
                 @foreach (Historial_Cliente historial_cliente in Model)
                 {
                 <tr>
-                    <td>@historial_cliente.HistorialClienteId</td>
+                    <td>@historial_cliente.Historial_ClienteId</td>
                     <td>@historial_cliente.NumeroCuota</td>
                     <td>@historial_cliente.FechaPagoReal</td>
                     <td>@historial_cliente.FechaPagoSolicitada</td>
@@ -59,16 +59,16 @@
                     <td>@historial_cliente.DiasRetrasoCliente</td>
                     <td>
                         <a class="btn btn-warning"
-                           asp-controller="HistorialCliente" asp-action="Edit" asp-route-id="@historial_cliente.HistorialClienteId">
+                           asp-controller="HistorialCliente" asp-action="Edit" asp-route-id="@historial_cliente.Historial_ClienteId">
                             Editar
                         </a>
                         <a class="btn btn-danger"
-                           asp-controller="HistorialCliente" asp-action="Delete" asp-route-id="@historial_cliente.HistorialClienteId">
+                           asp-controller="HistorialCliente" asp-action="Delete" asp-route-id="@historial_cliente.Historial_ClienteId">
                             Borrar
                         </a>
 
                         <a class="btn btn-warning"
-                           asp-controller="HistorialCliente" asp-action="Validar" asp-route-id="@historial_cliente.Cliente.ClienteId">
+                           asp-controller="HistorialCliente" asp-action="Validar" asp-route-id= "@historial_cliente.Historial_ClienteId">
                             Ver
                         </a>
                     </td>

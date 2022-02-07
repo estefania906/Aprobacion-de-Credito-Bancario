@@ -24,11 +24,11 @@ namespace Helpers
             this.validaciones = validaciones;
         }
 
-        
-            public  OpCosto_Cuota (Costo_Cuota costo_cuota) {
+
+        public OpCosto_Cuota(Costo_Cuota costo_cuota) {
 
             this.costo_cuota = costo_cuota;
-        
+
         }
 
         public OpCosto_Cuota(Cliente_Det cliente_det)
@@ -58,15 +58,20 @@ namespace Helpers
 
         }
 
-        public double CalCuota(){
+        public OpCosto_Cuota(List<Historial_Cliente> lista_historial_cliente)
+        {
+              lista_historial_cliente = new List<Historial_Cliente>();
+        }
+
+        public double CalCuota() {
             double a = Math.Pow(((1 + (costo_cuota.TasaAnual) / 100)), 0.083);
             double d = 1 / costo_cuota.NumeroCuotas;
-            double c = costo_cuota.MontoSolicitado * a  *(1-(1/(Math.Pow(1 + a,d))));
+            double c = costo_cuota.MontoSolicitado * a * (1 - (1 / (Math.Pow(1 + a, d))));
             return c;
 
         }
 
-       public double CalAmortizacion ()
+        public double CalAmortizacion()
         {
             double a = Math.Pow(((1 + (costo_cuota.TasaAnual) / 100)), 0.083);
             double d = 1 / costo_cuota.NumeroCuotas;
@@ -80,10 +85,10 @@ namespace Helpers
 
         public double CalTasaInteres()
         {
-            double r = ((Math.Pow (((1 + (costo_cuota.TasaAnual) / 100)) , 0.083))-1)*100;
-           
+            double r = ((Math.Pow(((1 + (costo_cuota.TasaAnual) / 100)), 0.083)) - 1) * 100;
+
             return r;
-            
+
 
         }
         public double CalPagoMensual()
@@ -93,7 +98,7 @@ namespace Helpers
             double d = 1 / costo_cuota.NumeroCuotas;
             double c = costo_cuota.MontoSolicitado * a * (1 - (1 / (Math.Pow(1 + a, d))));
             double f = c - ((a / 100) * costo_cuota.MontoSolicitado);
-            double p = f + (a*100) + 10;
+            double p = f + (a * 100) + 10;
             return p;
 
 
@@ -102,21 +107,21 @@ namespace Helpers
         public double CalPatrimonio()
         {
 
-            double dp =  costo_cuota.MontoSolicitado * 0.4;
+            double dp = costo_cuota.MontoSolicitado * 0.4;
             return dp;
         }
 
         public bool ValPatrimonioCliente(double p)
         {
-            bool ag  ;
+            bool ag;
             ag = (cliente_det.AvaluoBienParticular >= p);
             return ag;
         }
-    
+
         public bool ValPatrimonioGarante(double p)
         {
             bool pg;
-         
+
             pg = garante_det.AvaluoBienParticular >= p;
             return pg;
         }
@@ -131,13 +136,13 @@ namespace Helpers
         public bool ValComportamientoGarante()
         {
             bool cg;
-            cg = (0.4 * garante_det.ingreso_mensual_garante) >= (garante_det.Deuda_otros_bancos + garante_det.Gastos_garante)  ;
+            cg = (0.4 * garante_det.ingreso_mensual_garante) >= (garante_det.Deuda_otros_bancos + garante_det.Gastos_garante);
             return cg;
         }
-      /*  public int CalFechaCliente() {
+        public int CalFechaCliente() {
 
             int cf;
-            cf = Convert.ToInt32(historial_cliente.FechaPagoSolicitada - historial_cliente.FechaPagoReal) ;
+            cf = (historial_cliente.FechaPagoSolicitada - historial_cliente.FechaPagoReal).Days;
             return cf;
 
         }
@@ -145,43 +150,15 @@ namespace Helpers
         {
 
             int cf;
-            cf = Convert.ToInt32(historial_garante.FechaPagoSolicitada - historial_garante.FechaPagoReal) ;
+            cf = (historial_garante.FechaPagoSolicitada - historial_garante.FechaPagoReal).Days;
             return cf;
 
-        }*/
+        }
 
-        /*public int sum()
-        {
-            string connectionString = "Data Source = ACER\\MSSQLSERVER2; Integrated Security = true; Initial Catalog = Northwind";
-            SqlConnection conn = new SqlConnection(connectionString);
-            {
-                conn.Open();
-                SqlDataAdapter adapter = new SqlDataAdapter
-                    (
-                    "SELECT AVG (ALL DiasRetrasoCliente)" + " FROM Historial_Cliente " ,
-                    "WHERE ClienteId = '" +historial_cliente.ClienteId +"'" ,
-                    conn
-                    );
-
-                DataSet dataSet = new DataSet();
-                adapter.Fill(dataSet, "Historial_Cliente");
-
-                foreach (DataRow fila in dataSet.Tables["Historial_Cliente"].Rows)
-
-                {
-                    int val = fila.Field<int>("val_historial_cliente");
-                    Console.WriteLine("Suma: " + validaciones.val_historial_cliente);
-                }
-
-            }
-
-            return historial_cliente.;
-
-        }*/
         public bool ValHistorialCliente()
         {
             bool cg;
-            cg = (historial_cliente.DiasRetrasoCliente)<7;
+            cg = (historial_cliente.DiasRetrasoCliente) < 7;
             return cg;
 
 
@@ -194,6 +171,21 @@ namespace Helpers
             return cg;
 
 
+        }
+
+        public double CalDiasRetraso(List<Historial_Cliente> lista_historial_cliente) {
+
+            double suma = 0;
+
+            foreach (var item in lista_historial_cliente)
+            {
+                suma += item.DiasRetrasoCliente;
+            }
+            double promedio = 0;
+
+            promedio = suma / lista_historial_cliente.Count();
+
+            return promedio;
         }
     }
 }

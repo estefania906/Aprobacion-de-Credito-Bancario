@@ -21,20 +21,57 @@ namespace WebAplicacionCredito.Controllers
             IEnumerable<Garante> listaGarante = db.garante;
             return View(listaGarante);
         }
-
+        [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
 
-        public IActionResult Edit()
+        [HttpPost]
+        public IActionResult Create(Garante garante)
         {
-            return View();
+            db.garante.Add(garante);
+            db.SaveChanges();
+
+            TempData["mensaje"] = $"El garante {garante.NombreGarante + " " + garante.ApellidoGarante} ha sido creado exitosamente";
+
+            return RedirectToAction("Index");
+        }
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            Garante garante = db.garante.Find(id);
+            return View(garante);
         }
 
-        public IActionResult Delete()
+        [HttpPost]
+        public IActionResult Edit(Garante garante)
         {
-            return View();
+            db.garante.Update(garante);
+            db.SaveChanges();
+
+            TempData["mensaje"] = $"El garante {garante.NombreGarante + " " + garante.ApellidoGarante} ha sido actualizada exitosamente";
+
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            Garante garante = db.garante.Find(id);
+            return View(garante);
+        }
+        //Actualizar una materia
+        [HttpPost]
+        public IActionResult Delete(Garante garante)
+        {
+            db.garante.Remove(garante);
+            db.SaveChanges();
+
+            TempData["mensaje"] = $"El garante ha sido eliminado exitosamente";
+
+            return RedirectToAction("Index");
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿@using Modelo
 
-@model Historial_Cliente 
+@model Historial_Cliente
 
 
 @{
@@ -10,46 +10,50 @@
 <h1>Creacion de un registro en el historial del cliente</h1>
 <h1>Crea un registro en el Historial del Cliente</h1>
 
-<div class=" row ">
-    <div class=" col-se-10 ">
-        <form method="post" asp-action="Validar">
-            <div class="form-group">
-                <label class="control-label"> Historial Cliente:</label>
-                <input class="form-control" asp-for="NumeroCuota" />
-            </div>
-            <div class="form-group">
-                <label class="control-label"> Cliente:</label>
-                <input class="form-control" asp-for="Cliente.CedulaCliente" />
-            </div>
-         
+<div class="container">
+    <div class=" row ">
+        <div class=" col-sm-4 ">
+            <form method="post" asp-action="Validar">
+                <div class="form-group">
+                    <label class="control-label"> Historial Cliente:</label>
+                    <input class="form-control" asp-for="NumeroCuota" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label"> Cliente:</label>
+                    <input class="form-control" asp-for="Cliente.CedulaCliente" />
+                </div>
 
-            <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Validar" />
-            </div>
 
-        </form>
-    </div>
-    <div class=" col-se-10 ">
-        <table class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <td>Id Cliente</td>
-                    <td>Cliente </td>
-                    <td>Dias Retraso</td>
-                </tr>
-            </thead>
-            <tbody>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary" value="Validar" />
+                </div>
 
-                @foreach (var validaciones in Model.Validaciones)
-                {
+            </form>
+        </div>
+        <div class=" col-sm-8 ">
+            <table class="table table-bordered table-striped">
+                <thead>
                     <tr>
-                        <td>@validaciones.Cliente.ClienteId</td>
-                        <td>@validaciones.Cliente.NombreCliente @validaciones.Cliente.ApellidoCliente </td>
-                        <td>@ViewBag.CalHistorialCliente.Promedio(new List<Historial_Cliente>() { validaciones.Historial_Cliente })</td>
+                        <td>Id Cliente</td>
+                        <td>Cliente </td>
+                        <td>Dias Retraso</td>
+                        <td>Dias Retraso Finales</td>
                     </tr>
-                }
+                </thead>
+                <tbody>
 
-            </tbody>
-        </table>
+                    @foreach (var validaciones in Model.Validaciones)
+                    {
+                        <tr>
+                            <td>@validaciones.Cliente.ClienteId</td>
+                            <td>@validaciones.Cliente.NombreCliente @validaciones.Cliente.ApellidoCliente </td>
+                            <td>@ViewBag.CalHistorialCliente.Promedio(new List<Historial_Cliente>() { validaciones.Historial_Cliente })</td>
+                            <td>@validaciones.dias_retraso</td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>

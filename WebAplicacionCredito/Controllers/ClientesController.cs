@@ -80,7 +80,8 @@ namespace WebAplicacionCredito.Controllers
         [HttpGet]
         public IActionResult Delete(int id)
         {
-            Cliente cliente = db.cliente.Find(id);
+            Cliente cliente = db.cliente.Include(cliente => cliente.Garante)
+                                            .Single(cliente => cliente.ClienteId == id);
             return View(cliente);
         }
         //Actualizar una materia

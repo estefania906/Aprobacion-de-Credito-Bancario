@@ -15,7 +15,7 @@ namespace CargaDatos
         {
             ClientesDet, GaranteDet, CostoCuota,
             HistorialCliente, HistorialGarante, Credito,
-            Validaciones
+            Validaciones, Garante, Cliente, VigenciaTasaAnual, Configuracion
         }
 
         public Dictionary<ListasTipo, object> Carga()
@@ -28,11 +28,13 @@ namespace CargaDatos
                 TelefonoGarante = "0999215632"
             };
 
+            List<Garante> listaGarantes = new List<Garante>() { MariaSoliz };
 
 
             //Cliente
-            Modelo.Cliente JuanSalazar = new Cliente()
+            Cliente JuanSalazar = new Cliente()
             {
+               
                 NombreCliente = "Juan Ignacio",
                 ApellidoCliente = "Salazar Delgado",
                 CedulaCliente = "1752632215",
@@ -41,6 +43,7 @@ namespace CargaDatos
 
 
             };
+            List<Cliente> listaClientes = new List<Cliente>() { JuanSalazar };
 
             //Cliente Det
             Cliente_Det cliente_det = new Cliente_Det()
@@ -65,13 +68,13 @@ namespace CargaDatos
             };
          
             List<Garante_Det> listaGaranteDet = new List<Garante_Det>() { garante_det };
-
-
+           
             //Historial Cliente
+
             Historial_Cliente historial_cliente = new Historial_Cliente()
 
             {
-                DiasRetrasoCliente = 2,
+
                 Cliente = JuanSalazar,
                 CantidadPagada = 20,
                 CantidadSolicitada = 140,
@@ -80,11 +83,52 @@ namespace CargaDatos
                 NumeroCuota = 1,
                 Saldo = 120
             };
+
+
+            Historial_Cliente historialJuan1 = new Historial_Cliente()
+
+            {
+
+                Cliente = JuanSalazar,
+                CantidadPagada = 50,
+                CantidadSolicitada = 150,
+                FechaPagoReal = new DateTime(2021, 03, 05),
+                FechaPagoSolicitada = new DateTime(2021, 03, 07),
+                NumeroCuota = 2,
+                Saldo = 100
+
+            };
+
+
+            Historial_Cliente historialJuan2 = new Historial_Cliente()
+
+            {
+
+                Cliente = JuanSalazar,
+                CantidadPagada = 56,
+                CantidadSolicitada = 150,
+                FechaPagoReal = new DateTime(2021, 03, 05),
+                FechaPagoSolicitada = new DateTime(2021, 03, 06),
+                NumeroCuota = 3,
+                Saldo = 94
+
+            };
+
             OpCosto_Cuota retrasodias = new OpCosto_Cuota(historial_cliente);
 
-            //historial_cliente.DiasRetrasoCliente = retrasodias.CalFechaCliente();
+            OpCosto_Cuota retrasodiasJuan2 = new OpCosto_Cuota(historialJuan2);
 
-            List<Historial_Cliente> listaHistorialCliente = new List<Historial_Cliente>() { historial_cliente };
+            OpCosto_Cuota retrasodiasJuan1 = new OpCosto_Cuota(historialJuan1);
+
+            historial_cliente.DiasRetrasoCliente = retrasodias.CalFechaCliente();
+
+            historialJuan1.DiasRetrasoCliente = retrasodiasJuan1.CalFechaCliente();
+
+            historialJuan2.DiasRetrasoCliente = retrasodiasJuan2.CalFechaCliente();
+
+            List<Historial_Cliente> listaHistorialCliente = new List<Historial_Cliente>() { historial_cliente, historialJuan1, historialJuan2 };
+
+            //Historial Garante
 
             Historial_Garante historial_garante = new Historial_Garante()
 
@@ -104,6 +148,7 @@ namespace CargaDatos
 
             List<Historial_Garante> listaHistorialGarante = new List<Historial_Garante>() { historial_garante };
 
+            //Vigencia Tasa Anual
             VigenciaTasaAnual Anio2021 = new VigenciaTasaAnual()
             {
                 tasa_anual = 12.00,
@@ -125,6 +170,8 @@ namespace CargaDatos
                 fecha_fin = new DateTime(2022, 12, 31)
             };
 
+            List<VigenciaTasaAnual> listaVigenciaTasaAnual = new List<VigenciaTasaAnual>() { Anio2020, Anio2021, Anio2022 };
+
             //Costo Cuota
 
             Costo_Cuota costo_cuota = new Costo_Cuota()
@@ -136,25 +183,79 @@ namespace CargaDatos
                 Cliente = JuanSalazar,
 
             };
+
             List<Costo_Cuota> listaCostoCuota = new List<Costo_Cuota>() { costo_cuota };
 
-
-
             OpCosto_Cuota operacion = new OpCosto_Cuota(costo_cuota);
-
             costo_cuota.CalculoCuota = operacion.CalCuota();
             costo_cuota.CalculoAmortizacion = operacion.CalAmortizacion();
             costo_cuota.InteresMensual = operacion.CalTasaInteres();
             costo_cuota.CalculoPagoTotal = operacion.CalPagoMensual();
 
+            //Validaciones
+            OpCosto_Cuota operacion1 = new OpCosto_Cuota(cliente_det);
+            OpCosto_Cuota operacion2 = new OpCosto_Cuota(garante_det);
+            OpCosto_Cuota operacion3 = new OpCosto_Cuota(historial_cliente);
+            OpCosto_Cuota operacion4 = new OpCosto_Cuota(historial_garante);
+            OpCosto_Cuota operacion5 = new OpCosto_Cuota(costo_cuota);
+            OpCosto_Cuota opvalidaciones1 = new OpCosto_Cuota(historialJuan1);
+            OpCosto_Cuota opvalidaciones2 = new OpCosto_Cuota(historialJuan2);
+            OpCosto_Cuota retraso_dias = new OpCosto_Cuota(listaHistorialCliente);
+
+            Validaciones validaciones = new Validaciones()
+            {
+
+                val_patrimonio_cliente = operacion1.ValPatrimonioCliente(operacion5.CalPatrimonio()),
+                val_patrimonio_garante = operacion2.ValPatrimonioGarante(operacion5.CalPatrimonio()),
+                val_comportamiento_cliente = operacion1.ValComportamientoCliente(),
+                val_comportamiento_garante = operacion2.ValComportamientoGarante(),
+                val_historial_cliente = operacion3.ValHistorialCliente(),
+                val_historial_garante = operacion4.ValHistorialGarante(),
+                Historial_Cliente = historial_cliente
+            };
+
+            Validaciones validacionesJuan1 = new Validaciones()
+            {
+
+                val_patrimonio_cliente = operacion1.ValPatrimonioCliente(operacion5.CalPatrimonio()),
+                val_patrimonio_garante = operacion2.ValPatrimonioGarante(operacion5.CalPatrimonio()),
+                val_comportamiento_cliente = operacion1.ValComportamientoCliente(),
+                val_comportamiento_garante = operacion2.ValComportamientoGarante(),
+                val_historial_garante = operacion4.ValHistorialGarante(),
+                val_historial_cliente = opvalidaciones1.ValHistorialCliente(),
+                Historial_Cliente = historialJuan1
+            };
+
+            Validaciones validacionesJuan2 = new Validaciones()
+            {
+
+                val_patrimonio_cliente = operacion1.ValPatrimonioCliente(operacion5.CalPatrimonio()),
+                val_patrimonio_garante = operacion2.ValPatrimonioGarante(operacion5.CalPatrimonio()),
+                val_comportamiento_cliente = operacion1.ValComportamientoCliente(),
+                val_comportamiento_garante = operacion2.ValComportamientoGarante(),
+                val_historial_cliente = opvalidaciones2.ValHistorialCliente(),
+                val_historial_garante = operacion4.ValHistorialGarante(),
+                Historial_Cliente = historialJuan2
+            };
+
+            validaciones.dias_retraso = retrasodias.CalDiasRetraso(listaHistorialCliente);
+            validacionesJuan1.dias_retraso = retrasodias.CalDiasRetraso(listaHistorialCliente);
+            validacionesJuan2.dias_retraso = retrasodias.CalDiasRetraso(listaHistorialCliente);
+
+            //Validaciones 
+
+            List<Validaciones> listaValidaciones = new List<Validaciones>() { validaciones, validacionesJuan1, validacionesJuan2 };
 
             //Configuracion
 
             Configuracion configuracion = new Configuracion()
             {
+                BancoNombre = "Banco Proyecto S.A.",
                 Vigencia = Anio2022,
                 meses_tope = 48
             };
+
+            List<Configuracion> listaConfiguracion = new List<Configuracion>() { configuracion };
 
             //Credito
 
@@ -165,27 +266,8 @@ namespace CargaDatos
             };
 
             List<Credito> listaCredito = new List<Credito>() { credito };
-
-            //Validaciones 
-
-            OpCosto_Cuota operacion1 = new OpCosto_Cuota(cliente_det);
-            OpCosto_Cuota operacion2 = new OpCosto_Cuota(garante_det);
-            OpCosto_Cuota operacion3 = new OpCosto_Cuota(historial_cliente);
-            OpCosto_Cuota operacion4 = new OpCosto_Cuota(historial_garante);
-            OpCosto_Cuota operacion5 = new OpCosto_Cuota(costo_cuota);
-
-            Validaciones validaciones = new Validaciones()
-            {
-
-                val_patrimonio_cliente = operacion1.ValPatrimonioCliente(operacion5.CalPatrimonio()),
-                val_patrimonio_garante = operacion2.ValPatrimonioGarante(operacion5.CalPatrimonio()),
-                val_comportamiento_cliente = operacion1.ValComportamientoCliente(),
-                val_comportamiento_garante = operacion2.ValComportamientoGarante(),
-                val_historial_cliente = operacion3.ValHistorialCliente(),
-                val_historial_garante = operacion4.ValHistorialGarante()
-            };
-            List<Validaciones> listaValidaciones = new List<Validaciones>() { validaciones };
-
+                 
+            //Listas a cada uno de sus clientes y garantes
             JuanSalazar.Cliente_Det = listaClientesDet;
             JuanSalazar.Costo_Cuota = listaCostoCuota;
             JuanSalazar.Historial_Cliente = listaHistorialCliente;
@@ -198,8 +280,6 @@ namespace CargaDatos
 
             cliente_det.Costo_Cuota = listaCostoCuota;
 
-            historial_cliente.Validaciones = listaValidaciones;
-
             historial_garante.Validaciones = listaValidaciones;
 
             Anio2021.Costo_Cuota = listaCostoCuota;
@@ -211,30 +291,22 @@ namespace CargaDatos
 
             Dictionary<ListasTipo, object> dicListasDatos = new Dictionary<ListasTipo, object>()
             {
+                { ListasTipo.Garante, listaGarantes },
+                { ListasTipo.Cliente, listaClientes },
                 { ListasTipo.ClientesDet, listaClientesDet },
                 { ListasTipo.GaranteDet, listaGaranteDet },
                 { ListasTipo.CostoCuota, listaCostoCuota },
                 { ListasTipo.Credito, listaCredito },
                 { ListasTipo.HistorialCliente, listaHistorialCliente},
                 { ListasTipo.HistorialGarante,listaHistorialGarante },
-                { ListasTipo.Validaciones, listaValidaciones }
+                { ListasTipo.Validaciones, listaValidaciones },
+                { ListasTipo.VigenciaTasaAnual, listaVigenciaTasaAnual },
+                { ListasTipo.Configuracion, listaConfiguracion }
             };
 
-            return dicListasDatos;
+           return dicListasDatos;
 
-            /*  ModeloDB.ModeloDB repos = new ModeloDB.ModeloDB();
-
-              repos.cliente_det.AddRange(listaClientesDet);
-              repos.garante_det.AddRange(listaGaranteDet);
-              repos.costo_cuota.AddRange(listaCostoCuota);
-              repos.historial_cliente.AddRange(listaHistorialCliente);
-              repos.historial_garante.AddRange(listaHistorialGarante);
-              repos.credito.AddRange(listaCredito);
-              repos.validaciones.AddRange(listaValidaciones);
-
-              Console.WriteLine("Carga de datos iniciales ...");
-              repos.SaveChanges();*/
-        }
+      }
     }
    }
 

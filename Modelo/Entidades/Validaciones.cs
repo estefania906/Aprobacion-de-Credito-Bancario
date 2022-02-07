@@ -9,7 +9,7 @@ namespace Modelo
 {
     public class Validaciones
     {
-        [Key]
+        
         public int ValidacionesId { get; set; }
 
         public bool val_patrimonio_cliente { get; set; }
@@ -23,6 +23,8 @@ namespace Modelo
         public bool val_historial_cliente { get; set; }
 
         public bool val_historial_garante { get; set; }
+
+        public double dias_retraso { get; set; }
 
         public Cliente Cliente { get; set; }
         public int ClienteId { get; set; }

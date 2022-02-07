@@ -9,7 +9,7 @@ namespace Modelo
 {
     public class Configuracion
     {
-        [Key]
+        public string BancoNombre { get; set; }
         public VigenciaTasaAnual Vigencia { get; set; }
         public int VigenciaTasaAnualId { get; set; }
         public double meses_tope { get; set; }

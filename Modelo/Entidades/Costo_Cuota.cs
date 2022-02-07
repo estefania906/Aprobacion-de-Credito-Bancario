@@ -9,8 +9,8 @@ namespace Modelo
 {
     public class Costo_Cuota
     {
-        [Key]
-        public int CostoCuotaId { get; set; }
+       
+        public int Costo_CuotaId { get; set; }
         public double CalculoCuota { get; set; }
         public double CalculoAmortizacion { get; set; }
         public double TasaAnual { get; set; }
@@ -21,7 +21,7 @@ namespace Modelo
         public Cliente Cliente { get; set; }
         public int ClienteId { get; set; }
         public VigenciaTasaAnual VigenciaTasaAnual { get; set; }
-        public int VigenciaTasaAnaulId { get; set; }
+        public int VigenciaTasaAnualId { get; set; }
         public List<Credito> Credito { get; set; }
 
     }

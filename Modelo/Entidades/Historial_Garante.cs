@@ -9,8 +9,8 @@ namespace Modelo
 {
     public class Historial_Garante
     {
-        [Key]
-        public int HistorialGaranteId { get; set; }
+       
+        public int Historial_GaranteId { get; set; }
         public double NumeroCuota { get; set; }
         public DateTime FechaPagoReal { get; set; }
         public DateTime FechaPagoSolicitada { get; set; }

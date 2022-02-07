@@ -9,7 +9,7 @@ namespace Modelo
 {
     public class Garante
     {
-        [Key]
+       
         public int GaranteId { get; set; }
         public string NombreGarante { get; set; }
         public string ApellidoGarante { get; set; }

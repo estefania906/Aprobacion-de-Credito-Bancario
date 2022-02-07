@@ -9,7 +9,7 @@ using Microsoft.Data.SqlClient;
 
 namespace ModeloDB
 {
-
+   
     public class ModeloDB : DbContext
     {
         public ModeloDB()
@@ -64,7 +64,7 @@ namespace ModeloDB
             modelBuilder.Entity<Historial_Cliente>()
                 .HasOne(historial_cliente => historial_cliente.Cliente)
                 .WithMany(cliente => cliente.Historial_Cliente)
-                .HasForeignKey(historial_cliente => historial_cliente.HistorialClienteId);
+                .HasForeignKey(historial_cliente => historial_cliente.ClienteId);
 
             // Cliente 1 : 1 
             modelBuilder.Entity<Cliente>()
@@ -95,7 +95,7 @@ namespace ModeloDB
             modelBuilder.Entity<Costo_Cuota>()
                 .HasOne(costo_cuota => costo_cuota.VigenciaTasaAnual)
                 .WithMany(vigencia => vigencia.Costo_Cuota)
-                .HasForeignKey(costo_cuota => costo_cuota.VigenciaTasaAnaulId);
+                .HasForeignKey(costo_cuota => costo_cuota.VigenciaTasaAnualId);
 
             // Validaciones
             modelBuilder.Entity<Validaciones>()
@@ -124,14 +124,14 @@ namespace ModeloDB
                 .WithMany(historial_garante => historial_garante.Validaciones)
                 .OnDelete(DeleteBehavior.NoAction)
                 .HasForeignKey(validaciones => validaciones.HistorialGaranteId);
-            
+
             //Configuracion
             modelBuilder.Entity<Configuracion>()
-               .HasNoKey();
+               .HasKey(configuracion => configuracion.BancoNombre);
 
             //Credito
             modelBuilder.Entity<Credito>()
-                           .HasKey(credito => new { credito.ClienteId, credito.CostoCuotaId});
+                           .HasKey(credito => new { credito.ClienteId, credito.Costo_CuotaId});
 
             modelBuilder.Entity<Credito>()
                 .HasOne(credito => credito.Cliente)
@@ -143,7 +143,7 @@ namespace ModeloDB
                 .HasOne(credito => credito.Costo_Cuota)
                 .WithMany(costo_cuota => costo_cuota.Credito)
                 .OnDelete(DeleteBehavior.NoAction)
-                .HasForeignKey(credito => credito.CostoCuotaId);
+                .HasForeignKey(credito => credito.Costo_CuotaId);
 
 
         }
